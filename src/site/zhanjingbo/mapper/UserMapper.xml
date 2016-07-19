@@ -2,7 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.zhanjingbo.mapper.UserMapper">
+<mapper namespace="site.zhanjingbo.mapper.UserMapper">	
+	<resultMap type="User" id="UserResult">
+		<id property="id" column="id"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<association property="role" column="roleId" select="site.zhanjingbo.mapper.RoleMapper.getRoleById"></association>
+	</resultMap>
+
 	<insert id="addUser" parameterType="User" useGeneratedKeys="true" >
 		insert into user(username,password) values(#{username},#{password}) 
 	</insert>
@@ -12,17 +19,10 @@
 	<delete id="deleteUser" parameterType="Integer">
 		delete from user where id=#{id}
 	</delete>
-	<select id="getUserById" parameterType="Integer" resultType="User">
+	<select id="getUserById" parameterType="Integer" resultMap="UserResult">
 		select * from user where id=#{id}
 	</select>
-	
-	<resultMap type="User" id="UserList">
-		<id property="id" column="id"/>
-		<result property="username" column="username"/>
-		<result property="password" column="password"/>
-	</resultMap>
-	
-	<select id="getAllUser" resultMap="UserList">
+	<select id="getAllUser" resultMap="UserResult">
 		select * from user
 	</select>
 </mapper>
