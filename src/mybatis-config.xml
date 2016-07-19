@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  
+  <!--  引入相关JDBC配置文件 -->
+  <!-- properties主要包含各类配置信息，可以直接引入properties文件。也可以直接设置键值对 -->
+<!--   <properties>
+  	<property name="jdbc.dirverCLassName" value="com.mysql.jdbc.Driver"/>
+  </properties> -->
+  <properties  resource="jdbc.properties"/>
+  
+  
+  <typeAliases>
+  	<typeAlias type="site.zhanjingbo.model.User" alias="User"/>
+  </typeAliases>
+  
+  
+  <!-- 配置Mybatis运行的数据库环境 -->
+  <!-- MyBaties支持多个数据库环境，可以任意配置，default表示默认环境 -->
+  <environments default="development">
+	    <environment id="development">
+		      <transactionManager type="JDBC"/>
+		      <dataSource type="POOLED">
+		        <property name="driver" value="${jdbc.dirverClassName}"/>
+		        <property name="url" value="${jdbc.url}"/>
+		        <property name="username" value="${jdbc.username}"/>
+		        <property name="password" value="${jdbc.password}"/>
+		      </dataSource>
+	    </environment>
+	   
+  </environments>
+  
+  <!-- 对象与数据库映射文件 -->
+  <mappers>
+    
+    <!-- 包含这个包下的所有 -->
+    <package name="site.zhanjingbo.mapper"/>
+  </mappers>
+</configuration>
