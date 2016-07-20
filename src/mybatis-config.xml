@@ -13,8 +13,7 @@
   
   
   <typeAliases>
-  	<typeAlias type="site.zhanjingbo.model.User" alias="User"/>
-  	<typeAlias type="site.zhanjingbo.model.Role" alias="Role"/>
+  	<package name="site.zhanjingbo.model"/>
   </typeAliases>
   
   
@@ -35,7 +34,6 @@
   
   <!-- 对象与数据库映射文件 -->
   <mappers>
-    
     <!-- 包含这个包下的所有 -->
     <package name="site.zhanjingbo.mapper"/>
   </mappers>

@@ -14,7 +14,19 @@
 		insert into user(username,password) values(#{username},#{password}) 
 	</insert>
 	<update id="updateUser" parameterType="User">
-		update user set username=#{username},password=#{password} where id=#{id}
+		update user 
+		<set>
+			<if test="username!=null">
+				username=#{username},
+			</if>
+			<if test="password!=null">
+				password=#{password},
+			</if>
+			<if test="role!=null">
+				roleId=#{role.id},
+			</if>
+		</set>
+		where id=#{id}
 	</update>
 	<delete id="deleteUser" parameterType="Integer">
 		delete from user where id=#{id}
@@ -28,4 +40,22 @@
 	<select id="getUserByRole" resultMap="UserResult" parameterType="Integer">
 		select * from user where roleId=#{roleId}
 	</select>
+	
+	<select id="searchUser" parameterType="Map" resultMap="UserResult">
+		select * from user 
+		<where>
+			<if test="username!=null">
+				and username like #{username}
+			</if>
+			<if test="id!=null">
+				and id=#{id}
+			</if>
+			<if test="role!=null">
+				and roleId=#{role.id}
+			</if>
+		</where>
+		<foreach collection="collectionName" item="itemName" open="(" close=")" separator=",">
+		</foreach>
+	</select>
+	
 </mapper>
