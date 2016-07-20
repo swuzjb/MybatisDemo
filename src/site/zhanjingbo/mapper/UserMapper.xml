@@ -25,4 +25,7 @@
 	<select id="getAllUser" resultMap="UserResult">
 		select * from user
 	</select>
+	<select id="getUserByRole" resultMap="UserResult" parameterType="Integer">
+		select * from user where roleId=#{roleId}
+	</select>
 </mapper>

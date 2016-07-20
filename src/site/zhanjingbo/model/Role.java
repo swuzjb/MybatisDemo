@@ -1,9 +1,13 @@
 package site.zhanjingbo.model;
 
+import java.util.List;
+
 public class Role {
 	
 	private Integer id;
 	private String roleName;
+	
+	private List<User> userList;
 	
 	public Role(){
 		super();
@@ -27,9 +31,13 @@ public class Role {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	
-	
-	
+
+	public List<User> getUserList() {
+		return userList;
+	}
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", roleName=" + roleName + "]";
